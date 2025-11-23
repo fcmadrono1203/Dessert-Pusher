@@ -25,7 +25,7 @@ class DessertTimer(lifecycle: Lifecycle) : LifecycleObserver {
      * [Handler] is a class meant to process a queue of messages (known as [android.os.Message]s)
      * or actions (known as [Runnable]s)
      */
-    private var handler = Handler()
+    private var handler = Handler(Looper.getMainLooper())
     private lateinit var runnable: Runnable
 
 
@@ -37,7 +37,7 @@ class DessertTimer(lifecycle: Lifecycle) : LifecycleObserver {
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     fun startTimer() {
         // Create the runnable action, which prints out a log and increments the seconds counter
-        runnable = kotlinx.coroutines.Runnable {
+        runnable = Runnable {
             secondsCount++
             Timber.i("Timer is at : $secondsCount")
             // postDelayed re-adds the action to the queue of actions the Handler is cycling
