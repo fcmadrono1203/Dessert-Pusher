@@ -5,3 +5,4 @@ Members:
 Joshua Argel Detchaca
 Raphael B. Magaso
 Mary Angeli Talian
+Miguel Xavier San Jose

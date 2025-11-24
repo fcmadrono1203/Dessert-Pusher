@@ -12,6 +12,9 @@ import com.example.android.dessertpusher.databinding.ActivityMainBinding
 import timber.log.Timber
 
 // The LifecycleObserver is now implemented by the DessertTimer class
+
+const val KEY_REVENUE = "key_revenue"
+
 class MainActivity : AppCompatActivity() {
 
     private var revenue = 0
@@ -52,6 +55,10 @@ class MainActivity : AppCompatActivity() {
 
         // Setup the DessertTimer
         dessertTimer = DessertTimer(this.lifecycle)
+
+        if (savedInstanceState !=null){
+            savedInstanceState.getInt(key: "key_revenue")
+        }
 
         binding.revenue = revenue
         binding.amountSold = dessertsSold
@@ -138,5 +145,11 @@ class MainActivity : AppCompatActivity() {
             R.id.shareMenuButton -> onShare()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        outState.putInt(KEY_REVENUE, revenue)
+        Timber.i( message: "onSaveInstanceState Called")
     }
 }
